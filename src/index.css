@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@800&family=Cinzel:wght@700&family=Playfair+Display:ital,wght@1,900&family=Fira+Code:wght@700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-syne: "Syne", sans-serif;
+  --font-cinzel: "Cinzel", serif;
+  --font-playfair: "Playfair Display", serif;
+  --font-fira: "Fira Code", monospace;
+}
+
+/* Custom glow effect animations */
+@keyframes slow-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(1.15); }
+}
+
+.animate-sunset-pulse-1 {
+  animation: slow-pulse 12s infinite ease-in-out;
+}
+
+.animate-sunset-pulse-2 {
+  animation: slow-pulse 16s infinite ease-in-out reverse;
+}
+
+/* Hide scrollbars but keep functionality */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+@keyframes bounce-horizontal {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+.animate-horizontal-bounce {
+  animation: bounce-horizontal 1.2s infinite ease-in-out;
+}
+

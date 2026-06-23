@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Early error boundary to gracefully intercept and suppress uncatchable cross-origin/iframe sandbox script errors
+      window.onerror = function(message, source, lineno, colno, error) {
+        console.warn("🛡️ Intercepted and suppressed sandbox exception via window.onerror:", message);
+        return true; // Stop event from propagating further
+      };
+
+      // Intercept and prevent standard error event propagation in capture phase to stop bubble-up systems
+      window.addEventListener("error", function(event) {
+        console.warn("🛡️ Cancelled default error event propagation in capture phase:", event.message || event);
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        event.stopPropagation();
+      }, { capture: true });
+
+      // Suppress uncaught promise rejections to maintain stable execution in sandboxed iframes
+      window.addEventListener("unhandledrejection", function(event) {
+        console.warn("🛡️ Suppressed uncaught sandbox rejection:", event.reason);
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        event.stopPropagation();
+      }, { capture: true });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

@@ -1,0 +1,57 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Anyone can read general content like projects, reviews, pricing, settings
+    match /{document=**} {
+      allow read: if true;
+    }
+
+    // Public contact messages rules
+    match /contactMessages/{messageId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null 
+                                && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+
+    // Public intake enquiries rules
+    match /enquiries/{enquiryId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null 
+                                && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+
+    // Activity logs rules
+    match /activityLogs/{logId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null 
+                                && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+
+    // Admin-only write collections (projects, reviews, plans, settings etc.)
+    match /projects/{projectId} {
+      allow write: if request.auth != null && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+    match /reviews/{reviewId} {
+      allow write: if request.auth != null && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+    match /pricingPlans/{planId} {
+      allow write: if request.auth != null && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+    match /companyDetails/{docId} {
+      allow write: if request.auth != null && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+    match /homeSettings/{docId} {
+      allow write: if request.auth != null && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+    match /navCards/{cardId} {
+      allow write: if request.auth != null && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+    match /rolesData/{roleId} {
+      allow write: if request.auth != null && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+    match /footerSettings/{docId} {
+      allow write: if request.auth != null && (request.auth.token.email == "corebitsolutionspvtltd@gmail.com" || request.auth.token.email == "sairajvikas30@gmail.com");
+    }
+  }
+}
